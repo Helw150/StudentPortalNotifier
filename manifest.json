@@ -1,7 +1,7 @@
 {
     "name": "Portal Notifier",
     "version": "0.1",
-    "manifest_version": 1,
+    "manifest_version": 2,
     "description": "Tells Students about new updates on the student portal",
     "browser_action": {
 	"default_icon": "icon.png",
