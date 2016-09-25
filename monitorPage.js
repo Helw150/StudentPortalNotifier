@@ -1,7 +1,7 @@
 
 function DOMtoString(document_root) {
-    var html = '',
-        node = document_root.firstChild;
+    var html = '', nodeList = document_root.getElementById('announceContainer');
+    var node = nodeList.firstChild;
     while (node) {
         switch (node.nodeType) {
         case Node.ELEMENT_NODE:
