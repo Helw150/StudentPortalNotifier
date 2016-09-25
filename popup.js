@@ -1,22 +1,24 @@
-chrome.runtime.onMessage.addListener(function(request, sender) {
-  if (request.action == "getSource") {
-    message.innerHTML = request.source;
-  }
-});
+// chrome.runtime.onMessage.addListener(function(request, sender) {
+//   if (request.action == "getSource") {
+//     message.innerHTML = request.source;
+//   }
+// });
 
 function onWindowLoad() {
-
-  var message = document.querySelector('#message');
-
-  chrome.tabs.executeScript(null, {
-    file: "monitorPage.js"
-  }, function() {
-    // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-    if (chrome.runtime.lastError) {
-      message.innerText = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
+    var message = document.querySelector('#message'); 
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = "document";
+    var resp;
+    xhr.open("GET", "https://students.nyuad.nyu.edu/", true);
+    xhr.onreadystatechange = function() {
+	if (xhr.readyState == 4 && xhr.status == 200) {
+	    resp = xhr.responseXML;
+	    console.log(resp);
+	    console.log(DOMtoString(resp));
+	    message.innerHTML = DOMtoString(resp);
+	}
     }
-  });
-
+    xhr.send();
 }
 
 window.onload = onWindowLoad;

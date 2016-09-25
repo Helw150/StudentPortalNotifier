@@ -1,4 +1,3 @@
-
 function DOMtoString(document_root) {
     var html = '', nodeList = document_root.getElementById('announceContainer');
     var node = nodeList.firstChild;
@@ -7,7 +6,7 @@ function DOMtoString(document_root) {
         case Node.ELEMENT_NODE:
 	    if(~node.outerHTML.indexOf('data-announcement-id'))
 	    {
-		html += node.outerHTML;
+		html += node.innerText;
 	    }
 	    if(~node.outerHTML.indexOf('class="announcement"'))
 	    {
@@ -16,7 +15,7 @@ function DOMtoString(document_root) {
 		{
 		    var String=events[i].outerHTML.substring(events[i].outerHTML.indexOf('id="announcement-')+17,events[i].outerHTML.indexOf('id="announcement-')+22);
 		    var event = events[i].querySelector('a[href="#"]');
-		    html += '<a href="https://students.nyuad.nyu.edu/announcements/' + String + '">' + event.innerHTML + '</a><br>';
+		    html += '<a href="https://students.nyuad.nyu.edu/announcements/' + String + '"target="_blank">' + event.innerHTML + '</a><br>';
 		}
 	    }
             break;
@@ -26,8 +25,8 @@ function DOMtoString(document_root) {
     return html;
 }
 
-chrome.runtime.sendMessage({
-    action: "getSource",
-    source: DOMtoString(document)
-});
+// chrome.runtime.sendMessage({
+//     action: "getSource",
+//     source: DOMtoString(document)
+// });
  
